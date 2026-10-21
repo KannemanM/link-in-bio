@@ -10,7 +10,13 @@ FROM node:24-bookworm-slim AS runtime
 ENV NODE_ENV=production \
     HOST=0.0.0.0 \
     PORT=3000 \
-    XDG_CACHE_HOME=/tmp
+    XDG_CACHE_HOME=/tmp \
+    LINKS_FILE=/data/links.json \
+    CLICKS_LOG=/data/clicks.log \
+    AVATAR_FILE=/data/avatar.png \
+    OG_FILE=/data/og.png \
+    FAVICON_FILE=/data/favicon.svg \
+    BACKUP_DIR=/data/backups
 
 # rsvg-convert genera el avatar/OG; las fuentes evitan texto vacío en las imágenes.
 RUN apt-get update \
