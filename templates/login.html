@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{TITLE}}</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f7f4ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f4ef;
+      --surface: #fffdfa;
+      --text: #1c1917;
+      --muted: #6b625b;
+      --border: #e6dfd5;
+      --accent: #b45309;
+      --accent-contrast: #ffffff;
+      --accent-soft: rgba(180, 83, 9, 0.11);
+      --danger: #b42318;
+      --danger-soft: rgba(180, 35, 24, 0.1);
+      --good: #157347;
+      --good-soft: rgba(21, 115, 71, 0.1);
+      --shadow: 0 24px 60px -34px rgba(28, 25, 23, 0.55);
+      --radius: 18px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c0a09;
+        --surface: #161311;
+        --text: #f5f2ee;
+        --muted: #a8a09a;
+        --border: #2a2420;
+        --accent: #fbbf24;
+        --accent-contrast: #1c1917;
+        --accent-soft: rgba(251, 191, 36, 0.13);
+        --danger: #fca5a5;
+        --danger-soft: rgba(248, 113, 113, 0.12);
+        --good: #86efac;
+        --good-soft: rgba(74, 222, 128, 0.1);
+        --shadow: 0 28px 70px -40px rgba(0, 0, 0, 0.9);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 1.25rem;
+      background:
+        radial-gradient(42rem 24rem at 50% -18%, var(--accent-soft), transparent 68%),
+        var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .card {
+      width: min(100%, 25rem);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0 0 0.45rem;
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .sub {
+      margin: 0.55rem 0 1.35rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .alert {
+      margin: 0 0 1rem;
+      padding: 0.7rem 0.8rem;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font-size: 0.84rem;
+    }
+
+    .alert.bad {
+      border-color: color-mix(in srgb, var(--danger) 35%, transparent);
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .alert.good {
+      border-color: color-mix(in srgb, var(--good) 35%, transparent);
+      background: var(--good-soft);
+      color: var(--good);
+    }
+
+    .form {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.35rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      min-height: 2.7rem;
+      padding: 0.58rem 0.72rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--text);
+      font: inherit;
+      font-size: 0.95rem;
+    }
+
+    input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    button {
+      min-height: 2.75rem;
+      margin-top: 0.25rem;
+      padding: 0.6rem 0.9rem;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: var(--accent);
+      color: var(--accent-contrast);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      filter: brightness(1.06);
+    }
+
+    .note {
+      margin: 1.1rem 0 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-align: center;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 1.25rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-underline-offset: 2px;
+    }
+
+    .back:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 420px) {
+      .card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <p class="eyebrow">Acceso privado</p>
+    <h1>Entrar al panel</h1>
+    <p class="sub">Una sola cuenta para administración y estadísticas.</p>
+{{ALERT}}
+    <form method="post" action="/login" class="form">
+      <input type="hidden" name="csrf" value="{{CSRF}}">
+      <input type="hidden" name="next" value="{{NEXT}}">
+      <label class="field">
+        <span>Usuario</span>
+        <input type="text" name="user" value="{{USER}}" autocomplete="username" autocapitalize="none" spellcheck="false" required autofocus>
+      </label>
+      <label class="field">
+        <span>Contraseña</span>
+        <input type="password" name="pass" autocomplete="current-password" required>
+      </label>
+      <button type="submit">Entrar</button>
+    </form>
+    <p class="note">Sesión de 8 horas · El logout cierra la sesión en este navegador.</p>
+    <a class="back" href="/">← Volver a la página</a>
+  </main>
+</body>
+</html>

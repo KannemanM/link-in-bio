@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{BIO}}">
+  <meta name="author" content="{{NAME}}">
+  <meta name="theme-color" content="#f7f4ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{AVATAR}}">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="{{NAME}}">
+  <meta property="og:title" content="{{TITLE}}">
+  <meta property="og:description" content="{{BIO}}">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{OG_ALT}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{TITLE}}">
+  <meta name="twitter:description" content="{{BIO}}">
+  <meta name="twitter:image" content="{{OG_IMAGE}}">
+  <meta name="twitter:image:alt" content="{{OG_ALT}}">
+
+  <script type="application/ld+json">{{JSONLD}}</script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f4ef;
+      --surface: #fffdfa;
+      --surface-hover: #ffffff;
+      --text: #1c1917;
+      --muted: #6b625b;
+      --border: #e6dfd5;
+      --accent: #b45309;
+      --accent-soft: rgba(180, 83, 9, 0.11);
+      --shadow: 0 18px 40px -28px rgba(28, 25, 23, 0.45);
+      --radius: 16px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c0a09;
+        --surface: #161311;
+        --surface-hover: #1c1917;
+        --text: #f5f2ee;
+        --muted: #a8a09a;
+        --border: #2a2420;
+        --accent: #fbbf24;
+        --accent-soft: rgba(251, 191, 36, 0.13);
+        --shadow: 0 22px 50px -30px rgba(0, 0, 0, 0.9);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      background:
+        radial-gradient(58rem 30rem at 50% -12%, var(--accent-soft), transparent 68%),
+        var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .page {
+      display: flex;
+      min-height: 100vh;
+      min-height: 100svh;
+      width: min(100% - 2rem, 27rem);
+      margin: 0 auto;
+      padding:
+        max(3rem, calc(env(safe-area-inset-top) + 1.5rem))
+        0
+        max(1.75rem, calc(env(safe-area-inset-bottom) + 1rem));
+      flex-direction: column;
+    }
+
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 104px;
+      height: 104px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow:
+        0 0 0 6px var(--accent-soft),
+        0 14px 30px -20px rgba(0, 0, 0, 0.55);
+      object-fit: cover;
+    }
+
+    h1 {
+      margin: 1.25rem 0 0;
+      font-size: clamp(1.55rem, 6vw, 1.9rem);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      text-wrap: balance;
+    }
+
+    .bio {
+      max-width: 32ch;
+      margin: 0.55rem 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      text-wrap: pretty;
+    }
+
+    .links {
+      display: flex;
+      margin-top: 2rem;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    .link {
+      display: flex;
+      min-height: 3.5rem;
+      padding: 0.72rem 0.9rem;
+      align-items: center;
+      gap: 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: inherit;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .emoji {
+      display: grid;
+      width: 2.15rem;
+      height: 2.15rem;
+      flex: none;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      font-size: 1.05rem;
+      line-height: 1;
+    }
+
+    .emoji svg {
+      width: 1rem;
+      height: 1rem;
+      color: var(--accent);
+    }
+
+    .label {
+      min-width: 0;
+      flex: 1;
+      overflow-wrap: anywhere;
+    }
+
+    .arrow {
+      width: 1.05rem;
+      height: 1.05rem;
+      flex: none;
+      color: var(--muted);
+      transition:
+        transform 180ms ease,
+        color 180ms ease;
+    }
+
+    @media (hover: hover) {
+      .link:hover {
+        border-color: var(--accent);
+        border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+        background: var(--surface-hover);
+        box-shadow: var(--shadow);
+        transform: translateY(-2px);
+      }
+
+      .link:hover .arrow {
+        color: var(--accent);
+        transform: translate(2px, -2px);
+      }
+    }
+
+    .link:active {
+      transform: translateY(0) scale(0.995);
+    }
+
+    .link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .foot {
+      display: flex;
+      margin-top: auto;
+      padding-top: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.01em;
+    }
+
+    .dot {
+      opacity: 0.5;
+    }
+
+    .skip {
+      position: absolute;
+      top: 0.75rem;
+      left: -9999px;
+      z-index: 10;
+      padding: 0.6rem 0.9rem;
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.875rem;
+      box-shadow: var(--shadow);
+    }
+
+    .skip:focus {
+      left: 0.75rem;
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+
+      .link:hover,
+      .link:active {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#enlaces">Saltar a los enlaces</a>
+
+  <main class="page">
+    <header class="profile">
+      <img
+        class="avatar"
+        src="{{AVATAR}}"
+        width="208"
+        height="208"
+        alt="Retrato de {{NAME}}"
+        fetchpriority="high"
+        decoding="async"
+      >
+      <h1>{{NAME}}</h1>
+      <p class="bio">{{BIO}}</p>
+    </header>
+
+    <nav class="links" id="enlaces" aria-label="Enlaces">
+{{LINKS}}
+    </nav>
+
+    <footer class="foot">
+      <span>© {{YEAR}} {{NAME}}</span>
+      <span class="dot" aria-hidden="true">·</span>
+      <span>Sin cookies ni terceros</span>
+    </footer>
+  </main>
+</body>
+</html>

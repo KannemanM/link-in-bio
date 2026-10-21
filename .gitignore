@@ -1,0 +1,20 @@
+# Secretos y configuración local
+.env
+.env.*
+!.env.example
+
+# Datos persistentes y copias
+data/
+backups/
+*.log
+*.tar.gz
+
+# Dependencias y artefactos
+node_modules/
+coverage/
+*.tmp
+
+# Sistema operativo y editores
+.DS_Store
+.idea/
+.vscode/

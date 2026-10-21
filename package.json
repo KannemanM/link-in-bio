@@ -1,0 +1,32 @@
+{
+  "name": "link-in-bio",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Página de enlaces con panel de gestión, seguimiento propio de clics y despliegue Docker.",
+  "author": "Martín Kanneman",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KannemanM/link-in-bio.git"
+  },
+  "homepage": "https://github.com/KannemanM/link-in-bio#readme",
+  "bugs": {
+    "url": "https://github.com/KannemanM/link-in-bio/issues"
+  },
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "test": "node --test",
+    "assets": "node tools/generate-assets.mjs",
+    "validate": "node tools/validate.mjs",
+    "check": "node --check server.mjs && node --check lib/config.mjs && node --check lib/clicks.mjs && node --check lib/render.mjs && node --check lib/auth.mjs && node --check lib/session.mjs && node --check lib/admin.mjs && node --check lib/upload.mjs && node --check lib/assets.mjs && node --check tools/validate.mjs && node --check tools/generate-assets.mjs"
+  },
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "sharp": "^0.35.5"
+  }
+}

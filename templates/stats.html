@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{TITLE}}</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f7f4ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f4ef;
+      --surface: #fffdfa;
+      --surface-hover: #ffffff;
+      --text: #1c1917;
+      --muted: #6b625b;
+      --border: #e6dfd5;
+      --accent: #b45309;
+      --accent-soft: rgba(180, 83, 9, 0.11);
+      --shadow: 0 18px 40px -28px rgba(28, 25, 23, 0.45);
+      --radius: 16px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c0a09;
+        --surface: #161311;
+        --surface-hover: #1c1917;
+        --text: #f5f2ee;
+        --muted: #a8a09a;
+        --border: #2a2420;
+        --accent: #fbbf24;
+        --accent-soft: rgba(251, 191, 36, 0.13);
+        --shadow: 0 22px 50px -30px rgba(0, 0, 0, 0.9);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      background:
+        radial-gradient(60rem 28rem at 30% -12%, var(--accent-soft), transparent 65%),
+        var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(100% - 2rem, 58rem);
+      margin: 0 auto;
+      padding: 2.5rem 0 3rem;
+    }
+
+    .top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.35rem;
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.75rem, 4vw, 2.35rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .sub {
+      margin: 0.45rem 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .sub strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 2.5rem;
+      padding: 0.5rem 0.85rem;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: border-color 150ms ease, background-color 150ms ease;
+    }
+
+    .button:hover {
+      border-color: var(--accent);
+      background: var(--surface-hover);
+    }
+
+    .button:focus-visible,
+    .tab:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .logout-form {
+      margin: 0;
+    }
+
+    .ranges {
+      display: inline-flex;
+      padding: 0.22rem;
+      gap: 0.15rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+    }
+
+    .tab {
+      padding: 0.42rem 0.8rem;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background-color 150ms ease, color 150ms ease;
+    }
+
+    .tab:hover {
+      color: var(--text);
+    }
+
+    .tab[aria-current="page"] {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .cards {
+      display: grid;
+      margin: 1.25rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+      gap: 0.75rem;
+    }
+
+    .card {
+      padding: 1rem 1.05rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .card-label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .card-value {
+      margin: 0.4rem 0 0;
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .card-note {
+      margin: 0.2rem 0 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02) inset;
+      overflow: hidden;
+    }
+
+    .panel-head {
+      display: flex;
+      padding: 0.9rem 1.05rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .panel-body {
+      padding: 1rem 1.05rem 1.15rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    th {
+      padding: 0.6rem 1.05rem;
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-align: left;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.72rem 1.05rem;
+      border-top: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    tbody tr:hover {
+      background: var(--surface-hover);
+    }
+
+    .num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .link-cell {
+      display: flex;
+      min-width: 10.5rem;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .link-emoji {
+      display: grid;
+      width: 1.9rem;
+      height: 1.9rem;
+      flex: none;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      font-size: 0.92rem;
+      line-height: 1;
+    }
+
+    .link-title {
+      display: block;
+      color: var(--text);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    a.link-title:hover {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .link-slug {
+      display: block;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.7rem;
+    }
+
+    .removed .link-title {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .bars {
+      display: flex;
+      height: 118px;
+      align-items: flex-end;
+      gap: 3px;
+    }
+
+    .bar {
+      position: relative;
+      min-width: 2px;
+      height: 100%;
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      background: var(--border);
+      background: color-mix(in srgb, var(--border) 55%, transparent);
+      overflow: hidden;
+    }
+
+    .bar span {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border-radius: 3px 3px 0 0;
+      background: var(--accent);
+      opacity: 0.85;
+    }
+
+    .axis {
+      display: flex;
+      margin-top: 0.45rem;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+
+    .empty {
+      padding: 1.5rem 1rem;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    .refs {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      flex-direction: column;
+      gap: 0.55rem;
+      list-style: none;
+    }
+
+    .ref {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .ref-name {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .ref-count {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .foot {
+      display: flex;
+      margin-top: 1.25rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    .foot p {
+      margin: 0;
+    }
+
+    @media (max-width: 760px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .shell {
+        padding-top: 1.75rem;
+      }
+
+      .top {
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    {{CONTENT}}
+    <footer class="foot">
+      <p>Datos de <code>clicks.log</code> · Zona horaria: {{TZ}} · Actualizado {{GENERATED}}</p>
+      <p>Sesión protegida con cookie · El logout cierra la sesión en este navegador.</p>
+    </footer>
+  </main>
+</body>
+</html>

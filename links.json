@@ -1,0 +1,93 @@
+{
+  "name": "Tu Nombre",
+  "role": "Tu profesión",
+  "bio": "Una bio breve. Contá qué hacés y cómo pueden contactarte.",
+  "avatar": "/avatar.png",
+  "siteUrl": "https://links.example.com",
+  "links": [
+    {
+      "title": "Portafolio",
+      "url": "https://example.com",
+      "emoji": "🌐",
+      "slug": "portafolio"
+    },
+    {
+      "title": "Mi CV",
+      "url": "https://example.com/cv",
+      "emoji": "📄",
+      "slug": "cv"
+    },
+    {
+      "title": "LinkedIn",
+      "url": "https://www.linkedin.com/in/tu-usuario/",
+      "emoji": "💼",
+      "slug": "linkedin"
+    },
+    {
+      "title": "GitHub",
+      "url": "https://github.com/tu-usuario",
+      "emoji": "🐙",
+      "slug": "github"
+    },
+    {
+      "title": "Escríbeme",
+      "url": "mailto:hola@example.com",
+      "emoji": "✉️",
+      "slug": "email"
+    },
+    {
+      "title": "WhatsApp",
+      "url": "https://wa.me/000000000000",
+      "emoji": "💬",
+      "slug": "whatsapp"
+    },
+    {
+      "title": "Instagram",
+      "url": "https://www.instagram.com/tu-usuario/",
+      "emoji": "📸",
+      "slug": "instagram"
+    },
+    {
+      "title": "X",
+      "url": "https://x.com/tu-usuario",
+      "emoji": "𝕏",
+      "slug": "x"
+    },
+    {
+      "title": "YouTube",
+      "url": "https://www.youtube.com/@tu-usuario",
+      "emoji": "▶️",
+      "slug": "youtube"
+    },
+    {
+      "title": "TikTok",
+      "url": "https://www.tiktok.com/@tu-usuario",
+      "emoji": "🎵",
+      "slug": "tiktok"
+    },
+    {
+      "title": "Spotify",
+      "url": "https://open.spotify.com/user/tu-usuario",
+      "emoji": "🎧",
+      "slug": "spotify"
+    },
+    {
+      "title": "Behance",
+      "url": "https://www.behance.net/tu-usuario",
+      "emoji": "🎨",
+      "slug": "behance"
+    },
+    {
+      "title": "Telegram",
+      "url": "https://t.me/tu-usuario",
+      "emoji": "✈️",
+      "slug": "telegram"
+    },
+    {
+      "title": "Bluesky",
+      "url": "https://bsky.app/profile/tu-usuario.bsky.social",
+      "emoji": "🦋",
+      "slug": "bluesky"
+    }
+  ]
+}

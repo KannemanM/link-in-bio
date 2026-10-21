@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f7f4ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f4ef;
+      --surface: #fffdfa;
+      --text: #1c1917;
+      --muted: #6b625b;
+      --border: #e6dfd5;
+      --accent: #b45309;
+      --accent-soft: rgba(180, 83, 9, 0.11);
+      --shadow: 0 18px 40px -28px rgba(28, 25, 23, 0.45);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c0a09;
+        --surface: #161311;
+        --text: #f5f2ee;
+        --muted: #a8a09a;
+        --border: #2a2420;
+        --accent: #fbbf24;
+        --accent-soft: rgba(251, 191, 36, 0.13);
+        --shadow: 0 22px 50px -30px rgba(0, 0, 0, 0.9);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      display: grid;
+      min-height: 100svh;
+      margin: 0;
+      padding: 1.5rem;
+      place-items: center;
+      background:
+        radial-gradient(50rem 26rem at 50% -15%, var(--accent-soft), transparent 65%),
+        var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .card {
+      width: min(100%, 26rem);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .code {
+      margin: 0;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+    }
+
+    h1 {
+      margin: 0.5rem 0 0;
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    p {
+      margin: 0.65rem 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .back {
+      display: inline-flex;
+      min-height: 2.5rem;
+      margin-top: 1.5rem;
+      padding: 0.5rem 0.95rem;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .back:hover {
+      border-color: var(--accent);
+    }
+
+    .back:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <p class="code">{{CODE}}</p>
+    <h1>{{TITLE}}</h1>
+    <p>{{MESSAGE}}</p>
+    <a class="back" href="/">Volver a la página</a>
+  </main>
+</body>
+</html>

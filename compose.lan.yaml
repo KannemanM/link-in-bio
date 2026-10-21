@@ -1,0 +1,64 @@
+# Despliegue para una LAN sobre HTTP simple.
+# Uso: docker compose -f compose.lan.yaml build && docker compose -f compose.lan.yaml up -d
+#
+# El puerto se publica solo en BIND_IP (por defecto 192.168.1.50), no en todas
+# las interfaces. No se publica 443 y Caddy usa deploy/Caddyfile.local.
+
+name: link-in-bio
+
+services:
+  app:
+    build:
+      context: .
+    image: link-in-bio:latest
+    restart: unless-stopped
+    init: true
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: "3000"
+      TRUST_PROXY: "1"
+      LINKS_FILE: /data/links.json
+      CLICKS_LOG: /data/clicks.log
+      AVATAR_FILE: /data/avatar.png
+      OG_FILE: /data/og.png
+      FAVICON_FILE: /data/favicon.svg
+      BACKUP_DIR: /data/backups
+    volumes:
+      - data:/data
+    expose:
+      - "3000"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - web
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    ports:
+      - "${BIND_IP:-192.168.1.50}:80:80"
+    volumes:
+      - ./deploy/Caddyfile.local:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+
+volumes:
+  data:
+  caddy_data:
+  caddy_config:
+
+networks:
+  web:
