@@ -23,6 +23,14 @@ RUN apt-get update \
 
 WORKDIR /app
 
+ARG APP_VERSION=1.1.0
+LABEL org.opencontainers.image.title="link-in-bio" \
+      org.opencontainers.image.description="Página de enlaces con panel de administración, login único y estadísticas propias." \
+      org.opencontainers.image.source="https://github.com/KannemanM/link-in-bio" \
+      org.opencontainers.image.url="https://github.com/KannemanM/link-in-bio" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.version="${APP_VERSION}"
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json ./
 COPY server.mjs ./

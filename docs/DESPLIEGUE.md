@@ -17,6 +17,61 @@ Repositorio: <https://github.com/KannemanM/link-in-bio>
 No hace falta instalar Node.js ni Caddy en el servidor: todo corre dentro de los
 contenedores.
 
+## Opción rápida: imagen publicada en Docker Hub
+
+Si no querés clonar ni construir el proyecto, usá la imagen oficial:
+
+```bash
+docker pull kannemanm/link-in-bio:latest
+```
+
+### LAN con `docker run`
+
+```bash
+docker run -d --name link-in-bio \
+  -p 80:3000 \
+  -e SITE_URL=http://192.168.1.50 \
+  -e ADMIN_USER=admin \
+  -e ADMIN_PASS='una-clave-larga-y-unica' \
+  -e STATS_TZ=America/Argentina/Buenos_Aires \
+  -v link-in-bio_data:/data \
+  --read-only \
+  --tmpfs /tmp:size=64m \
+  --cap-drop ALL \
+  --security-opt no-new-privileges:true \
+  kannemanm/link-in-bio:latest
+```
+
+Cambiá `192.168.1.50` por la IP del servidor. La página queda en
+`http://192.168.1.50` y el acceso privado en `http://192.168.1.50/login`.
+
+### VPS con dominio y HTTPS usando `compose.hub.yaml`
+
+```bash
+cp .env.example .env
+chmod 600 .env
+# Completar DOMAIN, SITE_URL, ADMIN_USER y ADMIN_PASS
+docker compose -f compose.hub.yaml up -d
+```
+
+La imagen incluye el perfil y los 14 enlaces de ejemplo. Los datos reales se
+guardan en el volumen `link-in-bio_data`; no se pierden al actualizar la imagen.
+
+### Actualizar la imagen
+
+```bash
+docker pull kannemanm/link-in-bio:latest
+docker compose -f compose.hub.yaml up -d
+```
+
+Si usás `docker run`, detené y eliminá el contenedor, y volvé a crearlo con el
+mismo volumen:
+
+```bash
+docker rm -f link-in-bio
+# repetir el docker run con la nueva imagen
+```
+
 ## 1. Clonar y configurar
 
 ```bash

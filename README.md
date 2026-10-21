@@ -1,5 +1,7 @@
 # Página de enlaces (link-in-bio)
 
+[![Docker Hub](https://img.shields.io/docker/v/kannemanm/link-in-bio?label=docker%20hub)](https://hub.docker.com/r/kannemanm/link-in-bio)
+
 Página personal de enlaces, mobile-first, con panel de administración, avatar
 editable, seguimiento propio de clics y despliegue con Docker Compose. Todo el
 contenido vive en un único `links.json`; no hay base de datos, cookies de
@@ -91,6 +93,52 @@ Desde ahí se entra a `/admin` y `/stats` con la misma cuenta.
 
 Si `DOMAIN` y `SITE_URL` no coinciden, Caddy puede servir el sitio pero las URL
 canónicas y la tarjeta Open Graph apuntarán a otro dominio. Mantenlos alineados.
+
+## Imagen publicada en Docker Hub
+
+La imagen oficial está publicada como
+[`kannemanm/link-in-bio`](https://hub.docker.com/r/kannemanm/link-in-bio).
+
+Tags disponibles:
+
+- `latest`: última versión publicada.
+- `1.1.0`: versión fija.
+
+Para usar la imagen sin clonar el repositorio:
+
+```bash
+docker pull kannemanm/link-in-bio:latest
+```
+
+Ejemplo mínimo para una LAN, sirviendo la app directamente en el puerto 80:
+
+```bash
+docker run -d --name link-in-bio \
+  -p 80:3000 \
+  -e SITE_URL=http://192.168.1.50 \
+  -e ADMIN_USER=admin \
+  -e ADMIN_PASS='una-clave-larga-y-unica' \
+  -e STATS_TZ=America/Argentina/Buenos_Aires \
+  -v link-in-bio_data:/data \
+  --read-only \
+  --tmpfs /tmp:size=64m \
+  --cap-drop ALL \
+  --security-opt no-new-privileges:true \
+  kannemanm/link-in-bio:latest
+```
+
+Después abrí `http://192.168.1.50/login`.
+
+Para un VPS con dominio y HTTPS, usá `compose.hub.yaml`, que agrega Caddy:
+
+```bash
+cp .env.example .env
+# Completar DOMAIN, SITE_URL, ADMIN_USER y ADMIN_PASS
+docker compose -f compose.hub.yaml up -d
+```
+
+La imagen contiene el perfil y los enlaces de ejemplo. Los datos reales se
+guardan en el volumen `link-in-bio_data`.
 
 ## Despliegue en LAN sobre HTTP
 
@@ -405,8 +453,9 @@ link-in-bio/
 ├─ server.mjs                 # HTTP, rutas, /go, /admin, /stats, /healthz
 ├─ links.json                 # perfil y enlaces (semilla del volumen)
 ├─ Dockerfile
-├─ compose.yaml               # app + Caddy con TLS público
-├─ compose.lan.yaml           # app + Caddy para LAN sobre HTTP
+├─ compose.yaml               # app + Caddy con TLS público (build local)
+├─ compose.lan.yaml           # app + Caddy para LAN sobre HTTP (build local)
+├─ compose.hub.yaml           # app + Caddy usando la imagen de Docker Hub
 ├─ .dockerignore
 ├─ .env.example
 ├─ LICENSE                    # licencia MIT

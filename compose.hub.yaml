@@ -1,0 +1,70 @@
+# Despliegue con la imagen publicada en Docker Hub.
+#
+# Uso:
+#   cp .env.example .env
+#   # completar DOMAIN, SITE_URL, ADMIN_USER y ADMIN_PASS
+#   docker compose -f compose.hub.yaml up -d
+#
+# Para construir la imagen desde el código fuente, usá compose.yaml.
+# Para un despliegue en LAN sobre HTTP, usá compose.lan.yaml.
+
+name: link-in-bio
+
+services:
+  app:
+    image: ${IMAGE:-kannemanm/link-in-bio:latest}
+    restart: unless-stopped
+    init: true
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: "3000"
+      TRUST_PROXY: "1"
+      LINKS_FILE: /data/links.json
+      CLICKS_LOG: /data/clicks.log
+      AVATAR_FILE: /data/avatar.png
+      OG_FILE: /data/og.png
+      FAVICON_FILE: /data/favicon.svg
+      BACKUP_DIR: /data/backups
+    volumes:
+      - data:/data
+    expose:
+      - "3000"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - web
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN:?Define DOMAIN en el archivo .env}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+
+volumes:
+  data:
+  caddy_data:
+  caddy_config:
+
+networks:
+  web:
